@@ -29,7 +29,7 @@ const Home = () => {
     <div className="">
       <div className="w-full mt-5 mb-2 h-[8vw] bg-zinc-800 rounded overflow-hidden">
         <img
-          src=".assets/banner.gif"
+          src="banner.gif"
           alt="banner"
           className="w-full h-full object-cover"
         />
