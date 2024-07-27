@@ -25,7 +25,7 @@ const Header = () => {
     <nav>
       <div className="relative flex gap-4 justify-between items-center mb-3">
         <Link to="/" className="flex gap-2">
-          <img src="logo.svg" className="w-8" alt="Project-Logo" />
+          <img src="/logo.svg" className="w-8" alt="Project-Logo" />
           <h1 className="text-5xl font-bold tracking-tight cursor-pointer">
             GifHub
           </h1>
