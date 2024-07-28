@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { GifState } from "../context/gif-context";
 import FilterGif from "../components/FilterGif";
 import Gif from "../components/Gif";
-
+import Shimmer from "../components/Shimmer";
 
 const Search = () => {
   // Extracting the url id we passed in dynamic routing
@@ -47,9 +47,7 @@ const Search = () => {
           ))}
         </div>
       ) : (
-        <span>
-          No GIFs found for {query}. Try searching for Stickers instead?
-        </span>
+        <Shimmer />
       )}
     </div>
   );
