@@ -11,7 +11,9 @@ import {
 import { FaPaperPlane } from "react-icons/fa6";
 import { IoCodeSharp } from "react-icons/io5";
 import FollowOn from "../components/FollowOn";
+import ShimmerGIFPage from "../components/ShimmerGIFPage";
 
+// Pre-declaring the content of the element to be displayed in the
 const contentType = ["gif", "sticker", "text"];
 
 const SingleGIF = () => {
@@ -36,6 +38,9 @@ const SingleGIF = () => {
   // State variable for the embedded function
   const [embedCopied, setEmbedCopied] = useState(false);
 
+  // State variable for the shimmer function
+  const [loading, setLoading] = useState(true);
+
   // Wrote the code of api fetch in useEffect only this time
   useEffect(() => {
     if (!contentType.includes(type)) {
@@ -43,6 +48,9 @@ const SingleGIF = () => {
     }
 
     const fetchGif = async () => {
+      // Start loading for displaying the Shimmer function
+      setLoading(true);
+
       // Splitting the slug as we only want the last bit of it
       const gifID = slug.split("-").pop();
 
@@ -56,6 +64,9 @@ const SingleGIF = () => {
 
       setGif(data);
       setRelatedGifs(relData.data); // Ensure we're setting the correct data property
+
+      // End loading to remove the shimmer function
+      setLoading(false);
     };
 
     fetchGif();
@@ -84,6 +95,11 @@ const SingleGIF = () => {
     // Reset the feedback message after 2 seconds
     setTimeout(() => setEmbedCopied(false), 2000);
   };
+
+  if (loading) {
+    // Render shimmer component while loading
+    return <ShimmerGIFPage />;
+  }
 
   return (
     <div className="grid grid-cols-4 my-10 gap-4">
@@ -216,9 +232,8 @@ const SingleGIF = () => {
               className="flex gap-5 items-center font-bold text-lg"
             >
               <IoCodeSharp size={30} />
-              {embedCopied  ? "Embedded Code Copied" : "Embed"}
+              {embedCopied ? "Embedded Code Copied" : "Embed"}
             </button>
-            
           </div>
         </div>
 

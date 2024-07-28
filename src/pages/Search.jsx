@@ -4,6 +4,7 @@ import { GifState } from "../context/gif-context";
 import FilterGif from "../components/FilterGif";
 import Gif from "../components/Gif";
 
+
 const Search = () => {
   // Extracting the url id we passed in dynamic routing
   const { query } = useParams();

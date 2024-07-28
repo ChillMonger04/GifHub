@@ -18,7 +18,9 @@ const Home = () => {
   // So the filter we toggle in the FilterGif component changes the filter in context
   // After in context filter changes the useEffect is called again, and new data is fetched for the filter
   const fetchTrendingGIFs = async () => {
-    setLoading(true); // Set loading to true before fetching
+    // Set loading to true before fetching
+    setLoading(true);
+    
     const { data } = await giphy.trending({
       // These all the properties in the api, read sandbox
       limit: 30,
@@ -27,7 +29,8 @@ const Home = () => {
     });
 
     setGifs(data);
-    setLoading(false); // Set loading to false after fetching
+    // Set loading to false after fetching
+    setLoading(false);
   };
 
   return (
