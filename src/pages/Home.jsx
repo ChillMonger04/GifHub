@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GifState } from "../context/gif-context";
 import Gif from "../components/Gif";
 import FilterGif from "../components/FilterGif";
+import Shimmer from "../components/Shimmer"; // Import the Shimmer component
 
 const Home = () => {
   const { giphy, filter, gifs, setGifs } = GifState();
+  // State to handle loading and display shimmer
+  const [loading, setLoading] = useState(true);
 
   // This will be called whenever there is a change in the filter in our Context state
   useEffect(() => {
@@ -15,6 +18,7 @@ const Home = () => {
   // So the filter we toggle in the FilterGif component changes the filter in context
   // After in context filter changes the useEffect is called again, and new data is fetched for the filter
   const fetchTrendingGIFs = async () => {
+    setLoading(true); // Set loading to true before fetching
     const { data } = await giphy.trending({
       // These all the properties in the api, read sandbox
       limit: 30,
@@ -23,6 +27,7 @@ const Home = () => {
     });
 
     setGifs(data);
+    setLoading(false); // Set loading to false after fetching
   };
 
   return (
@@ -39,9 +44,11 @@ const Home = () => {
 
       {/* Styling the divs in a Masonry layout */}
       <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-2">
-        {gifs.map((gif) => (
-          <Gif gif={gif} key={gif.id} />
-        ))}
+        {loading ? (
+          <Shimmer /> // Show shimmer while loading
+        ) : (
+          gifs.map((gif) => <Gif gif={gif} key={gif.id} />)
+        )}
       </div>
     </div>
   );
