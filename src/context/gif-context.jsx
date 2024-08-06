@@ -49,8 +49,7 @@ const GifProvider = ({ children }) => {
         favorites,
       }}
     >
-      {" "}
-      {children}{" "}
+      {children}
     </GifContext.Provider>
   );
 };
